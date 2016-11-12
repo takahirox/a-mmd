@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MMD Models</title>
+    <meta name="description" content="A-Frame MMD Models">
+    <script>
+    /*
+    var WebVRConfig = {
+        FORCE_ENABLE_VR: true,
+        BUFFER_SCALE: 1.0
+    };
+    */
+    </script>
+    <script src="./node_modules/aframe/dist/aframe.js"></script>
+    <script src="./node_modules/three/examples/js/libs/charsetencoder.min.js"></script>
+    <script src="./node_modules/three/examples/js/libs/ammo.js"></script>
+    <script src="./dist/a-mmd.js"></script>
+  </head>
+  <body>
+    <a-scene antialias="true">
+      <a-assets>
+        <img id="sky" src="https://rawgit.com/aframevr/aframe/master/examples/primitives/models/peach-gradient.jpg">
+      </a-assets>
+
+      <a-entity position="0 10 20">
+      	<a-camera></a-camera>
+      </a-entity>
+
+      <a-entity mmd="audio:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/audios/wavefile_short.mp3;
+                     audioDelayTime:5.333333333333333; afterglow:2.0;">
+        <a-entity mmd-model="model:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/miku/miku_v2.pmd;
+                             vmd:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/vmds/wavefile_v2.vmd;
+                             physics:true;" position="-10 0 0"></a-entity>
+        <a-entity mmd-model="model:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/miku/miku_v2.pmd;
+                             vpd:https://rawgit.com/takahirox/MMDLoader-app/master/vpd/imas/makoto_basic.vpd;
+                             physics:true; blink:true" position="10 0 0"></a-entity>
+      </a-entity>
+
+      <a-plane rotation="-90 0 0" color="#AAAAAA" height="200" width="200"></a-plane>
+
+      <a-sky src="#sky"></a-sky>
+
+      <a-light type="ambient" color="#888"></a-light>
+      <a-light color="#AAA" distance="100" intensity="0.4" type="point"></a-light>
+    </a-scene>
+  </body>
+</html>

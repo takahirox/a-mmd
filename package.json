@@ -1,0 +1,31 @@
+{
+  "name": "a-mmd",
+  "version": "0.0.1",
+  "description": "A-Frame MMD",
+  "main": "index.js",
+  "scripts": {
+     "dist": "webpack index.js dist/a-mmd.js && webpack -p index.js dist/a-mmd.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takahirox/a-mmd.git"
+  },
+  "keywords": [
+    "aframe",
+    "aframe-vr",
+    "vr",
+    "mozvr",
+    "webvr"
+  ],
+  "author": "Takahiro https://github.com/takahirox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takahirox/a-mmd/issues"
+  },
+  "homepage": "https://github.com/takahirox/a-mmd",
+  "devDependencies": {
+    "aframe": "^0.3.2",
+    "three": "^0.82.1",
+    "webpack": "^1.13.3"
+  }
+}
