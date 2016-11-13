@@ -2,11 +2,10 @@
  * @author Takahiro / https://github.com/takahirox
  *
  * Dependencies
- *  - charsetencoder.min.js  https://github.com/takahirox/charset-encoder-js
- *  - ammo.js                https://github.com/kripken/ammo.js/
+ *  - ammo.js  https://github.com/kripken/ammo.js/
  *
  * TODO
- *  - Embed the above two libs
+ *  - Import Ammo.js
  *  - PositionalAudio
  */
 
@@ -19,6 +18,9 @@ require('three/examples/js/loaders/MMDLoader');
 require('three/examples/js/effects/OutlineEffect');
 require('three/examples/js/animation/CCDIKSolver');
 require('three/examples/js/animation/MMDPhysics');
+
+// used in MMDLoader
+window.CharsetEncoder = require('charset-encoder-js').CharsetEncoder;
 
 var mmdLoader = new THREE.MMDLoader();
 //mmdLoader.enableImageCrossOrigin(true);
