@@ -12,14 +12,14 @@
     };
     */
     </script>
-    <script src="./node_modules/aframe/dist/aframe.js"></script>
-    <script src="./node_modules/three/examples/js/libs/ammo.js"></script>
+    <script src="./libs/aframe.js"></script>
+    <script src="https://cdn.rawgit.com/kripken/ammo.js/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/builds/ammo.js"></script>
     <script src="./build/a-mmd.min.js"></script>
   </head>
   <body>
     <a-scene antialias="true">
       <a-assets>
-        <img id="sky" src="https://rawgit.com/aframevr/aframe/master/examples/primitives/models/peach-gradient.jpg">
+        <img id="sky" src="https://cdn.rawgit.com/aframevr/aframe/master/examples/primitives/models/peach-gradient.jpg">
       </a-assets>
 
       <a-entity position="0 10 20">
@@ -32,7 +32,7 @@
                              vmd:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/vmds/wavefile_v2.vmd;
                              physics:true;" position="-10 0 0"></a-entity>
         <a-entity mmd-model="model:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/miku/miku_v2.pmd;
-                             vpd:https://rawgit.com/takahirox/MMDLoader-app/master/vpd/imas/makoto_basic.vpd;
+                             vpd:https://cdn.rawgit.com/takahirox/MMDLoader-app/master/vpd/imas/makoto_basic.vpd;
                              physics:true; blink:true" position="10 0 0"></a-entity>
       </a-entity>
 
