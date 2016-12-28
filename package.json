@@ -1,7 +1,7 @@
 {
   "name": "a-mmd",
   "version": "0.0.1",
-  "description": "A-Frame MMD",
+  "description": "A-Frame MMD component",
   "main": "index.js",
   "scripts": {
     "all": "npm run build && npm run build-uglify",
@@ -16,6 +16,7 @@
     "aframe",
     "aframe-vr",
     "vr",
+    "mmd",
     "mozvr",
     "webvr"
   ],
