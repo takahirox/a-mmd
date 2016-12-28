@@ -41,6 +41,10 @@ AFRAME.registerComponent('mmd', {
     },
     afterglow: {
       type: 'number'
+    },
+    outline: {
+      type: 'boolean',
+      default: true
     }
   },
 
@@ -51,6 +55,7 @@ AFRAME.registerComponent('mmd', {
     // one MMDHelper instance per a mmd component
     this.helper = new THREE.MMDHelper();
     this.entityCount = this.getMMDEntityCount(this.el);
+    this.drawOutline = this.data.outline;
     this.el.addEventListener('model-loaded', this.onModelLoaded.bind(this));
   },
 
@@ -213,7 +218,9 @@ AFRAME.registerComponent('mmd', {
   },
 
   tick: function (time, delta) {
-    if (this.effect === null) { this.setupOutlineEffect(this.el); }
+    if (this.effect === null && this.drawOutline) {
+      this.setupOutlineEffect(this.el);
+    }
     if (!this.ready) { return; }
     this.helper.animate(delta / 1000);
   }

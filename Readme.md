@@ -8,12 +8,13 @@
 
 ### mmd
 
-| Properties     | Description | type   | Default Value |
-| -------------- | ----------- | ------ | ------------- |
-| audio          |             | string | ''            |
-| volume         |             | number | 1.0           |
-| audioDelayTime |             | number | 0.0           |
-| afterglow      |             | number | 0.0           |
+| Properties     | Description | type    | Default Value |
+| -------------- | ----------- | ------- | ------------- |
+| audio          |             | string  | ''            |
+| volume         |             | number  | 1.0           |
+| audioDelayTime |             | number  | 0.0           |
+| afterglow      |             | number  | 0.0           |
+| outline        |             | boolean | true           |
 
 ### mmd-model
 
