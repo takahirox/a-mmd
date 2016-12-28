@@ -67,7 +67,8 @@
 	__webpack_require__(5);
 
 	// used in MMDLoader
-	window.MMDParser = __webpack_require__(6);
+	var MMDParser = __webpack_require__(6);
+	if (window) window.MMDParser = MMDParser;
 
 	var mmdLoader = new THREE.MMDLoader();
 	mmdLoader.setTextureCrossOrigin('anonymous');

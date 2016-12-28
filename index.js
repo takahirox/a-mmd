@@ -21,7 +21,8 @@ require('three/examples/js/animation/CCDIKSolver');
 require('three/examples/js/animation/MMDPhysics');
 
 // used in MMDLoader
-window.MMDParser = require('mmd-parser');
+var MMDParser = require('mmd-parser');
+if (window) window.MMDParser = MMDParser;
 
 var mmdLoader = new THREE.MMDLoader();
 mmdLoader.setTextureCrossOrigin('anonymous');
