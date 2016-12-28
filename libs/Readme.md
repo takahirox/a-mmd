@@ -1,1 +1,1 @@
-This directory is temporal. I may be remove soon.
+This directory is temporal. I may remove soon.
