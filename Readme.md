@@ -1,30 +1,41 @@
-# A-Frame MMD component (WIP)
+# A-Frame MMD component
+
+a-mmd is an A-Frame MMD component which enables MMD models to dance.
 
 ![screenshot](./screenshot.png "screenshot")
 ![screenshot2](./screenshot2.png "screenshot2")
 
+# A-Frame version
+
+a-mmd requires the latest A-Frame which is under development.
+
+Clone A-Frame repository then build by yourself
+
+https://github.com/aframevr/aframe
+
+or use libs/aframe.js in this repository.
 
 ## Properties
 
 ### mmd
 
-| Properties     | Description | type    | Default Value |
-| -------------- | ----------- | ------- | ------------- |
-| audio          |             | string  | ''            |
-| volume         |             | number  | 1.0           |
-| audioDelayTime |             | number  | 0.0           |
-| afterglow      |             | number  | 0.0           |
-| outline        |             | boolean | true           |
+| Properties     | type    | Default Value | Description | 
+| -------------- | ------- | ------------- | ----------- | 
+| audio          | string  | ''            | Audio file path. | 
+| volume         | number  | 1.0           | Audio volume. |
+| audioDelayTime | number  | 0.0           | How long audio delays to start to play since model starts to dance. | 
+| afterglow      | number  | 0.0           | How long model keeps the last motion since dance/audio ends. | 
+| outline        | boolean | true          | If draw outline. Note that true affects all models in the same scene. | 
 
 ### mmd-model
 
-| Properties | Description | type    | Default Value |
-| ---------- | ----------- | ------- | ------------- |
-| model      |             | string  | ''            |
-| vpd        |             | string  | ''            |
-| vmd        |             | string  | ''            |
-| physics    |             | boolean | false         |
-| blink      |             | boolean | false         |
+| Properties | type    | Default Value | Description |
+| ---------- | ------- | ------------- | ----------- |
+| model      | string  | ''            | MMD model file path. |
+| vpd        | string  | ''            | MMD pose file path. |
+| vmd        | string  | ''            | MMD dance file path. |
+| physics    | boolean | false         | If turn on physics. |
+| blink      | boolean | false         | If model blinks one's eyes. |
 
 
 ## Browser
