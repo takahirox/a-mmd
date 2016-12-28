@@ -20,20 +20,12 @@ require('three/examples/js/animation/CCDIKSolver');
 require('three/examples/js/animation/MMDPhysics');
 
 // used in MMDLoader
-window.CharsetEncoder = require('charset-encoder-js').CharsetEncoder;
+window.MMDParser = require('mmd-parser');
 
 var mmdLoader = new THREE.MMDLoader();
-//mmdLoader.enableImageCrossOrigin(true);
+mmdLoader.setTextureCrossOrigin('anonymous');
 
-var mmdHelper = new THREE.MMDHelper(
-  // dummy
-  {
-    getSize: function() {
-      return {width:1, height:1}
-    },
-    setSize: function(width, height) {}
-  }
-);
+var mmdHelper = new THREE.MMDHelper();
 
 AFRAME.registerComponent('mmd', {
   schema: {
@@ -55,23 +47,9 @@ AFRAME.registerComponent('mmd', {
   init: function () {
     this.effect = null;
     this.ready = false;
-    var dummy = {
-      getSize: function() {
-        return {width:1, height:1}
-      },
-      setSize: function(width, height) {}
-    };
     this.loader = mmdLoader;
     // one MMDHelper instance per a mmd component
-    this.helper = new THREE.MMDHelper(
-      // dummy
-      {
-        getSize: function() {
-          return {width:1, height:1}
-        },
-        setSize: function(width, height) {}
-      }
-    );
+    this.helper = new THREE.MMDHelper();
     this.entityCount = this.getMMDEntityCount(this.el);
     this.el.addEventListener('model-loaded', this.onModelLoaded.bind(this));
   },
@@ -79,18 +57,9 @@ AFRAME.registerComponent('mmd', {
   setupOutlineEffect: function (el) {
     var sceneEl = el.sceneEl;
     var renderer = sceneEl.renderer;
-    var effect = sceneEl.effect;
 
     // override scene's effect
     if (renderer !== undefined) {
-      var keys = Object.keys(renderer);
-      for (var i = 0, il = keys.length; i < il; i++) {
-        var key = keys[i];
-        if (THREE.OutlineEffect.prototype[key] === undefined) {
-          THREE.OutlineEffect.prototype[key] = typeof renderer[key] === 'function' ? renderer[key].bind(renderer) : renderer[key];
-        }
-      }
-
       this.effect = new THREE.OutlineEffect(renderer);
       sceneEl.effect = new THREE.VREffect(this.effect);
     }
@@ -110,7 +79,6 @@ AFRAME.registerComponent('mmd', {
 
   update: function () {
     var self = this;
-    var el = this.el;
     var audioUrl = this.data.audio;
     var volume = this.data.volume;
     var audioDelayTime = this.data.audioDelayTime;
@@ -333,4 +301,3 @@ AFRAME.registerComponent('mmd-model', {
     if (modelUrl !== '') { loadModel(); }
   }
 });
-
