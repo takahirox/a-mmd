@@ -5,6 +5,10 @@ a-mmd is an A-Frame MMD component which enables MMD models to dance.
 ![screenshot](./screenshot.png "screenshot")
 ![screenshot2](./screenshot2.png "screenshot2")
 
+## Demo
+
+[Demo](https://cdn.rawgit.com/takahirox/a-mmd/501ef7354931e6b9267d44f6d18c3d3ce03e2333/index.html)
+
 # A-Frame version
 
 a-mmd requires the latest A-Frame which is under development.
