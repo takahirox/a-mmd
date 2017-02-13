@@ -9,24 +9,18 @@ a-mmd is an A-Frame MMD component which enables MMD models to dance.
 
 [Demo](https://cdn.rawgit.com/takahirox/a-mmd/501ef7354931e6b9267d44f6d18c3d3ce03e2333/index.html)
 
-# A-Frame version
+# Required A-Frame revision
 
-a-mmd requires the latest A-Frame which is under development.
-
-Clone A-Frame repository then build by yourself
-
-https://github.com/aframevr/aframe
-
-or use libs/aframe.js in this repository.
+A-Frame v0.5.0 or newer (Three.js r83 or newer)
 
 ## Properties
 
 ### mmd
 
-| Properties     | type    | Default Value | Description | 
+| Properties     | type    | Default Value | Description | 
 | -------------- | ------- | ------------- | ----------- | 
-| audio          | string  | ''            | Audio file path. | 
-| volume         | number  | 1.0           | Audio volume. |
+| audio          | string  | ''            | Audio file path. | 
+| volume         | number  | 1.0           | Audio volume. |
 | audioDelayTime | number  | 0.0           | How long audio delays to start to play since model starts to dance. | 
 | afterglow      | number  | 0.0           | How long model keeps the last motion since dance/audio ends. | 
 | outline        | boolean | true          | If draw outline. Note that true affects all models in the same scene. | 
