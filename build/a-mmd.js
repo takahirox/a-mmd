@@ -276,12 +276,24 @@
 	  },
 
 	  init: function () {
-	    this.mesh = null;
+	    this.model = null;
 	    this.loader = mmdLoader;
 	    this.helper = mmdHelper;
 	  },
 
 	  update: function () {
+	    var data = this.data;
+	    if (!data.model) { return; }
+	    this.remove();
+	    this.load();
+	  },
+
+	  remove: function () {
+	    if (!this.model) { return; }
+	    this.el.removeObject3D('mesh');
+	  },
+
+	  load: function () {
 	    var self = this;
 	    var el = this.el;
 	    var modelUrl = this.data.model;
@@ -328,7 +340,7 @@
 	        // this property will be removed later
 	        mesh.blink = self.data.blink;
 
-	        self.mesh = mesh;
+	        self.model = mesh;
 	        el.setObject3D('mesh', mesh);
 	        el.emit('model-loaded', {format: 'mmd', model: mesh});
 	    }
