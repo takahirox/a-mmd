@@ -23,7 +23,6 @@ A-Frame v0.5.0 or newer (Three.js r83 or newer)
 | volume         | number  | 1.0           | Audio volume. |
 | audioDelayTime | number  | 0.0           | How long audio delays to start to play since model starts to dance. | 
 | afterglow      | number  | 0.0           | How long model keeps the last motion since dance/audio ends. | 
-| outline        | boolean | true          | If draw outline. Note that true affects all models in the same scene. | 
 
 ### mmd-model
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>MMD Models</title>
-    <meta name="description" content="A-Frame MMD dance">
+    <meta name="description" content="A-Frame MMD loader component">
     <script>
     /*
     var WebVRConfig = {
@@ -15,6 +15,7 @@
     <script src="https://cdn.rawgit.com/aframevr/aframe/v0.5.0/dist/aframe-master.min.js"></script>
     <script src="https://cdn.rawgit.com/kripken/ammo.js/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/builds/ammo.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.2.0/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.0/build/aframe-outline.min.js"></script>
     <script src="./build/a-mmd.js"></script>
   </head>
   <body>
@@ -24,7 +25,7 @@ The license of MMD assets used here
 https://github.com/mrdoob/three.js/tree/dev/examples/models/mmd#readme
 -->
 
-    <a-scene antialias="true">
+    <a-scene outline stats antialias="true">
       <a-assets>
         <img id="sky" src="https://cdn.rawgit.com/aframevr/aframe/master/examples/primitives/models/peach-gradient.jpg">
       </a-assets>

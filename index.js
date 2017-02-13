@@ -16,7 +16,6 @@ if (typeof AFRAME === 'undefined') {
 
 require('three/examples/js/loaders/TGALoader');
 require('three/examples/js/loaders/MMDLoader');
-require('three/examples/js/effects/OutlineEffect');
 require('three/examples/js/animation/CCDIKSolver');
 require('three/examples/js/animation/MMDPhysics');
 
@@ -43,10 +42,6 @@ AFRAME.registerComponent('mmd', {
     },
     afterglow: {
       type: 'number'
-    },
-    outline: {
-      type: 'boolean',
-      default: true
     }
   },
 
@@ -57,19 +52,7 @@ AFRAME.registerComponent('mmd', {
     // one MMDHelper instance per a mmd component
     this.helper = new THREE.MMDHelper();
     this.entityCount = this.getMMDEntityCount(this.el);
-    this.drawOutline = this.data.outline;
     this.el.addEventListener('model-loaded', this.onModelLoaded.bind(this));
-  },
-
-  setupOutlineEffect: function (el) {
-    var sceneEl = el.sceneEl;
-    var renderer = sceneEl.renderer;
-
-    // override scene's effect
-    if (renderer !== undefined) {
-      this.effect = new THREE.OutlineEffect(renderer);
-      sceneEl.effect = new THREE.VREffect(this.effect);
-    }
   },
 
   getMMDEntityCount: function (el) {
@@ -220,9 +203,6 @@ AFRAME.registerComponent('mmd', {
   },
 
   tick: function (time, delta) {
-    if (this.effect === null && this.drawOutline) {
-      this.setupOutlineEffect(this.el);
-    }
     if (!this.ready) { return; }
     this.helper.animate(delta / 1000);
   }
