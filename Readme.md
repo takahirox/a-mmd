@@ -8,6 +8,7 @@ a-mmd is an A-Frame MMD component which enables MMD models to dance and sing.
 ## Demo
 
 [Demo Dance](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index.html)
+
 [Demo Posing](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index2.html)
 
 # Dependencies
