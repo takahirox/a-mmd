@@ -1,28 +1,44 @@
 # A-Frame MMD component
 
-a-mmd is an A-Frame MMD component which enables MMD models to dance.
+a-mmd is an A-Frame MMD component which enables MMD models to dance and sing.
 
 ![screenshot](./screenshot.png "screenshot")
 ![screenshot2](./screenshot2.png "screenshot2")
 
 ## Demo
 
-[Demo](https://cdn.rawgit.com/takahirox/a-mmd/501ef7354931e6b9267d44f6d18c3d3ce03e2333/index.html)
+[Demo Dance](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index.html)
+[Demo Posing](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index2.html)
 
-# Required A-Frame revision
+# Dependencies
+
+## Required A-Frame revision
 
 A-Frame v0.5.0 or newer (Three.js r83 or newer)
+
+## Ammo.js
+
+You need to load ammo.js in a page where a-mmd works
+
+https://github.com/kripken/ammo.js/
+
+## A-Frame Outline effect component
+
+To draw outline, use A-Frame Outline effect component.
+
+https://github.com/takahirox/aframe-outline
 
 ## Properties
 
 ### mmd
 
-| Properties     | type    | Default Value | Description | 
-| -------------- | ------- | ------------- | ----------- | 
-| audio          | string  | ''            | Audio file path. | 
+| Properties     | type    | Default Value | Description |
+| -------------- | ------- | ------------- | ----------- |
+| audio          | string  | ''            | Audio file path. |
+| autoplay       | boolean | true          | Automatically start audio and dance when they're ready. |
 | volume         | number  | 1.0           | Audio volume. |
-| audioDelayTime | number  | 0.0           | How long audio delays to start to play since model starts to dance. | 
-| afterglow      | number  | 0.0           | How long model keeps the last motion since dance/audio ends. | 
+| audioDelayTime | number  | 0.0           | How long audio delays to start to play since model starts to dance. |
+| afterglow      | number  | 0.0           | How long model keeps the last motion since dance/audio ends. |
 
 ### mmd-model
 
@@ -30,7 +46,7 @@ A-Frame v0.5.0 or newer (Three.js r83 or newer)
 | ---------- | ------- | ------------- | ----------- |
 | model      | string  | ''            | MMD model file path. |
 | vpd        | string  | ''            | MMD pose file path. |
-| vmd        | string  | ''            | MMD dance file path. |
+| vmd        | string  | ''            | MMD dance file path. You can set multiple vmd files separated by ',' |
 | physics    | boolean | false         | If turn on physics. |
 | blink      | boolean | false         | If model blinks one's eyes. |
 
@@ -39,15 +55,16 @@ A-Frame v0.5.0 or newer (Three.js r83 or newer)
 
 ### How to use
 
-```
+```html
 <head>
-  <script src="./libs/ammo.js"></script>
-  <script src="./libs/aframe.min.js"></script>
-  <script src="./build/a-mmd.min.js"></script>
+  <script src="https://cdn.rawgit.com/aframevr/aframe/v0.5.0/dist/aframe-master.min.js"></script>
+  <script src="https://cdn.rawgit.com/kripken/ammo.js/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/builds/ammo.js"></script>
+  <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.0/build/aframe-outline.min.js"></script>
+  <script src="https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/build/a-mmd.min.js"></script>
 </head>
 
 <body>
-  <a-scene antialias="true">
+  <a-scene antialias="true" outline>
     <a-entity position="0 10 20">
       <a-camera></a-camera>
     </a-entity>
