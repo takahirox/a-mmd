@@ -79,41 +79,86 @@
 	    audio: {
 	      type: 'string'
 	    },
+	    autoplay: {
+	      type: 'boolean',
+	      default: true
+	    },
 	    volume: {
 	      type: 'number',
 	      default: 1.0
 	    },
 	    audioDelayTime: {
-	      type: 'number'
+	      type: 'number',
+	      default: 0.0
 	    },
 	    afterglow: {
-	      type: 'number'
+	      type: 'number',
+	      default: 0.0
 	    }
 	  },
 
 	  init: function () {
-	    this.effect = null;
-	    this.ready = false;
+	    var self = this;
+	    this.playing = false;
 	    this.loader = mmdLoader;
-	    // one MMDHelper instance per a mmd component
-	    this.helper = new THREE.MMDHelper();
-	    this.entityCount = this.getMMDEntityCount(this.el);
-	    this.el.addEventListener('model-loaded', this.onModelLoaded.bind(this));
-	  },
-
-	  getMMDEntityCount: function (el) {
-	    var entities = el.querySelectorAll('a-entity');
-	    var count = 0;
-
-	    for(var i = 0, il = entities.length; i < il; i++) {
-	      var entity = entities[i];
-	      if(entity.getAttribute('mmd-model') !== null) { count++; }
-	    }
-
-	    return count;
+	    this.helper = null;
+	    this.el.addEventListener('model-loaded', function() {
+	      self.setupModelsIfReady();
+	    });
 	  },
 
 	  update: function () {
+	    this.remove();
+	    this.setupHelper();
+	    this.load();
+	    this.setupModelsIfReady();
+	  },
+
+	  remove: function () {
+	    this.cleanupHelper();
+	  },
+
+	  tick: function (time, delta) {
+	    if (!this.playing) { return; }
+	    this.helper.animate(delta / 1000);
+	  },
+
+	  play: function () {
+	    this.playing = true;
+	  },
+
+	  stop: function () {
+	    this.playing = false;
+
+	    var helper = this.helper;
+
+	    if (helper === null) { return; }
+
+	    var audioManager = helper.audioManager;
+	    if (audioManager !== null) {
+	      audioManager.audio.stop();
+	    }
+
+	    var meshes = helper.meshes;
+	    for (var i = 0, il = meshes.length; i < il; i++) {
+	      var mixer = meshes[i].mixer;
+	      if (mixer !== null && mixer !== undefined) {
+	        mixer.stopAllAction();
+	      }
+	    }
+	  },
+
+	  setupHelper: function () {
+	    // one MMDHelper instance per a mmd component
+	    this.helper = new THREE.MMDHelper();
+	  },
+
+	  cleanupHelper: function () {
+	    this.stop();
+	    this.helper = null;
+	  },
+
+	  load: function () {
 	    var self = this;
 	    var audioUrl = this.data.audio;
 	    var volume = this.data.volume;
@@ -125,20 +170,95 @@
 	      loader.loadAudio(audioUrl, function (audio, listener) {
 	        if (volume !== 1.0) { audio.setVolume(volume); }
 	        listener.position.z = 1;
+
 	        var params = {};
 	        if (audioDelayTime !== 0) {
 	          params.delayTime = audioDelayTime;
 	        }
 	        helper.setAudio(audio, listener, params);
-	        self.checkIfReady();
+
+	        self.setupModelsIfReady();
 	      });
 	    }
 
-	    if (audioUrl !== '' ) {
+	    if (audioUrl !== '') {
 	      loadAudio();
-	    } else {
-	      this.checkIfReady();
 	    }
+	  },
+
+	  getMMDEntities: function () {
+	    var el = this.el;
+	    var entities = el.querySelectorAll('a-entity');
+
+	    var readIndex = 0;
+	    var writeIndex = 0;
+	    for(var i = 0, il = entities.length; i < il; i++) {
+	      var entity = entities[i];
+	      if (entity.getAttribute('mmd-model') !== null) {
+	        entities[writeIndex] = entities[readIndex];
+	        writeIndex++;
+	      }
+	      readIndex++;
+	    }
+	    entities.length = writeIndex;
+
+	    return entities;
+	  },
+
+	  setupModelsIfReady: function () {
+	    if (this.checkIfReady()) { this.setupModels(); }
+	  },
+
+	  checkIfReady: function () {
+	    return (this.helper !== null &&
+	      this.checkIfAudioReady() && this.checkIfModelsReady());
+	  },
+
+	  checkIfAudioReady: function () {
+	    return (this.data.audio === '') || (this.helper.audioManager !== null);
+	  },
+
+	  checkIfModelsReady: function () {
+	    var entities = this.getMMDEntities();
+
+	    for(var i = 0, il = entities.length; i < il; i++) {
+	      if (entities[i].getObject3D('mesh') === undefined) { return false; }
+	    }
+
+	    return true;
+	  },
+
+	  setupModels: function () {
+	    var helper = this.helper;
+	    var afterglow = this.data.afterglow;
+	    var autoplay = this.data.autoplay;
+
+	    var entities = this.getMMDEntities();
+
+	    for(var i = 0, il = entities.length; i < il; i++) {
+	      var mesh = entities[i].getObject3D('mesh');
+	      if (mesh !== undefined) {
+	        helper.setAnimation(mesh);
+	        helper.add(mesh);
+	      }
+	    }
+
+	    var params = {};
+	    if (afterglow !== 0) {
+	      params.afterglow = afterglow;
+	    }
+	    helper.unifyAnimationDuration(params);
+
+	    // blink animation duration should be independent of other animations.
+	    // so set it after we call unifyAnimationDuration().
+	    for (var i = 0, il = helper.meshes.length; i < il; i++) {
+	      var mesh = helper.meshes[i];
+	      mesh.looped = true;
+	      if (mesh.blink) { this.setBlink(mesh); }
+	      delete mesh.blink;
+	    }
+
+	    if (autoplay) { this.play(); }
 	  },
 
 	  setBlink: function (mesh) {
@@ -204,53 +324,6 @@
 	        }
 	      }
 	    }
-	  },
-
-	  onModelLoaded: function (e) {
-	    var helper = this.helper;
-	    var format = e.detail.format;
-	    var mesh = e.detail.model;
-
-	    if (format === 'mmd') {
-	      helper.setAnimation(mesh);
-	      helper.add(mesh);
-	    }
-
-	    this.checkIfReady();
-	  },
-
-	  checkIfReady: function () {
-	    var hasAudio = this.data.audio !== '';
-
-	    var audioReady = !hasAudio || (this.helper.audioManager !== null);
-	    var modelsReady = this.helper.meshes.length >= this.entityCount;
-
-	    if (audioReady && modelsReady) { this.getReady(); }
-	  },
-
-	  getReady: function () {
-	    var helper = this.helper;
-	    var afterglow = this.data.afterglow;
-
-	    var params = {};
-	    if (afterglow !== 0) {
-	      params.afterglow = afterglow;
-	    }
-	    helper.unifyAnimationDuration(params);
-
-	    for (var i = 0; i < helper.meshes.length; i++) {
-	      var mesh = helper.meshes[i];
-	      mesh.looped = true;
-	      if (mesh.blink) { this.setBlink(mesh); }
-	      delete mesh.blink;
-	    }
-
-	    this.ready = true;
-	  },
-
-	  tick: function (time, delta) {
-	    if (!this.ready) { return; }
-	    this.helper.animate(delta / 1000);
 	  }
 	});
 
@@ -316,7 +389,7 @@
 	        } else if (vpdUrl !== '') {
 	          loadVpd(mesh);
 	        } else {
-	          getReady(mesh);
+	          setup(mesh);
 	        }
 	      });
 	    }
@@ -324,7 +397,7 @@
 	    function loadVpd (mesh) {
 	      loader.loadVpd(vpdUrl, function (vpd) {
 	        helper.poseAsVpd(mesh, vpd);
-	        getReady(mesh);
+	        setup(mesh);
 	      });
 	    }
 
@@ -332,17 +405,17 @@
 	      var urls = vmdUrl.replace(/\s/g, '').split(',');
 	      loader.loadVmds(urls, function (vmd) {
 	        loader.pourVmdIntoModel(mesh, vmd);
-	        getReady(mesh);
+	        setup(mesh);
 	      });
 	    }
 
-	    function getReady (mesh) {
-	        // this property will be removed later
-	        mesh.blink = self.data.blink;
+	    function setup (mesh) {
+	      // this property will be removed in mmd.setupModels()
+	      mesh.blink = self.data.blink;
 
-	        self.model = mesh;
-	        el.setObject3D('mesh', mesh);
-	        el.emit('model-loaded', {format: 'mmd', model: mesh});
+	      self.model = mesh;
+	      el.setObject3D('mesh', mesh);
+	      el.emit('model-loaded', {format: 'mmd', model: mesh});
 	    }
 
 	    if (modelUrl !== '') { loadModel(); }
