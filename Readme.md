@@ -7,15 +7,11 @@ a-mmd is an A-Frame MMD component which enables MMD models to dance and sing.
 
 ## Demo
 
-[Demo Dance](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index.html)
+[Demo Dance](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.3/index.html)
 
-[Demo Posing](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/index2.html)
+[Demo Posing](https://cdn.rawgit.com/takahirox/a-mmd/v1.0.3/index2.html)
 
 # Dependencies
-
-## Required A-Frame revision
-
-A-Frame v0.5.0 or newer (Three.js r83 or newer)
 
 ## Ammo.js
 
@@ -58,10 +54,10 @@ https://github.com/takahirox/aframe-outline
 
 ```html
 <head>
-  <script src="https://cdn.rawgit.com/aframevr/aframe/v0.5.0/dist/aframe-master.min.js"></script>
+  <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
   <script src="https://cdn.rawgit.com/kripken/ammo.js/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/builds/ammo.js"></script>
-  <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.0/build/aframe-outline.min.js"></script>
-  <script src="https://cdn.rawgit.com/takahirox/a-mmd/v1.0.2/build/a-mmd.min.js"></script>
+  <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.1/build/aframe-outline.min.js"></script>
+  <script src="https://cdn.rawgit.com/takahirox/a-mmd/v1.0.3/build/a-mmd.min.js"></script>
 </head>
 
 <body>
