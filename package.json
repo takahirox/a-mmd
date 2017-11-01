@@ -1,6 +1,6 @@
 {
   "name": "a-mmd",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A-Frame MMD component",
   "main": "index.js",
   "scripts": {
@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/takahirox/a-mmd#readme",
   "devDependencies": {
-    "aframe": "^0.5.0",
+    "aframe": "^0.7.1",
     "mmd-parser": "^1.0.3",
-    "three": "^0.83.0",
-    "webpack": "^1.13.3"
+    "three": "^0.87.1",
+    "webpack": "^3.8.1"
   }
 }
 
