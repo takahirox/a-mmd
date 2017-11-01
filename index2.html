@@ -4,17 +4,9 @@
     <meta charset="utf-8">
     <title>MMD Models</title>
     <meta name="description" content="A-Frame MMD pose">
-    <script>
-    /*
-    var WebVRConfig = {
-        FORCE_ENABLE_VR: true,
-        BUFFER_SCALE: 1.0
-    };
-    */
-    </script>
-    <script src="https://cdn.rawgit.com/aframevr/aframe/v0.5.0/dist/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/kripken/ammo.js/dcab07bf0e7f2b4b64c01dc45da846344c8f50be/builds/ammo.js"></script>
-    <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.0/build/aframe-outline.min.js"></script>
+    <script src="https://cdn.rawgit.com/takahirox/aframe-outline/v1.1.1/build/aframe-outline.min.js"></script>
     <script src="./build/a-mmd.min.js"></script>
   </head>
   <body>
@@ -26,7 +18,7 @@ https://github.com/mrdoob/three.js/tree/dev/examples/models/mmd#readme
 
     <a-scene antialias="true" outline>
       <a-assets>
-        <img id="sky" src="https://cdn.rawgit.com/aframevr/aframe/master/examples/primitives/models/peach-gradient.jpg">
+        <img id="sky" crossorigin="anonymous" src="https://cdn.rawgit.com/aframevr/aframe/v0.7.1/examples/primitives/models/peach-gradient.jpg">
       </a-assets>
 
       <a-entity position="0 15 8">
@@ -34,7 +26,7 @@ https://github.com/mrdoob/three.js/tree/dev/examples/models/mmd#readme
       </a-entity>
 
       <a-entity mmd>
-        <a-entity mmd-model="model:https://cdn.rawgit.com/mrdoob/three.js/dev/examples/models/mmd/miku/miku_v2.pmd;
+        <a-entity mmd-model="model:https://cdn.rawgit.com/mrdoob/three.js/r87/examples/models/mmd/miku/miku_v2.pmd;
                              vpd:https://cdn.rawgit.com/takahirox/MMDLoader-app/master/assets/vpd/imas/makoto_basic.vpd;
                              physics:true; blink:true" position="0 0 0"></a-entity>
       </a-entity>
